@@ -1,4 +1,4 @@
-## Implementation of the Bubble Sort algorithm (step by step)
+## Implementation of the Merge Sort algorithm (step by step)
 
-Time complexity: O(N^2)
-Space complexity: O(1)
+Time complexity: O(NLogN)
+Space complexity: O(n)
