@@ -22,8 +22,7 @@ public class RecursiveSelectionSort {
 		
 		if (leftIndex < rightIndex) {
 			int minIndex = leftIndex;
-			int i;
-			for (i = leftIndex+1; i <= rightIndex; i++) {
+			for (int i = leftIndex+1; i <= rightIndex; i++) {
 				if (array[i] < array[minIndex]) {
 					minIndex = i;
 				}
