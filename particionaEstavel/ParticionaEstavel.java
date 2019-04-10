@@ -25,7 +25,6 @@ class ParticionaEstavel {
 					k--;
 				}
 			}
-
 		}
 
 		int j = 1;
@@ -33,7 +32,6 @@ class ParticionaEstavel {
 			swap(array, j, j - 1);
 			j++;
 		}
-
 	}
 	
 	private static int[] getArrayInteiros(Scanner scan) {
