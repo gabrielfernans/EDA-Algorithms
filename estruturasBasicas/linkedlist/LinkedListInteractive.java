@@ -53,13 +53,37 @@ public class LinkedList {
 				prev = aux;
 				aux = aux.next;
 			}
+			
+			if (aux == null) 
+				return false;
+			
+			else {
+				prev.next = aux.next;
+				this.size --;
+				return true;
+			}
 		}
 		return false;
 	}
 	
 	public void removeLast() {
-		
-		
+		if(!this.isEmpty()) {
+			if (this.head.next == null) {
+				this.head = null;
+			}
+			
+			else {
+				Node prev = null;
+				Node aux = head;
+				
+				while (aux.next != null) {
+					prev = aux;
+					aux = aux.next;
+				}
+				prev.next = null;
+			}
+			this.size --;
+		}	
 	}
 	
 	public int size() {
@@ -67,8 +91,14 @@ public class LinkedList {
 	}
 	
 	public String toString() {
+		String out = "";
+		Node aux = head;
 		
-		return "";
+		while (aux != null) {
+			out += aux.value + " ";
+			aux = aux.next;
+		}
+		return out.trim();
 	}
 }
 
