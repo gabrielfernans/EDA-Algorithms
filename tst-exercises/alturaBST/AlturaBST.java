@@ -1,105 +1,107 @@
-package tst;
-
 import java.util.Scanner;
 
 class AlturaBST {
 	private static Scanner scan;
+	private static Node root;
 	
 	public static void main(String[] args) {
 		scan = new Scanner(System.in);
-		int[] array = getIntArray(scan);
-		
-		BST tree = new BST();
-		for (int element : array) {
-			tree.insert(element);
-		}
-		System.out.println(tree.height());
-		scan.close();
-	}
-	
-	private static int[] getIntArray(Scanner scan) {
 		String[] input = scan.nextLine().split(" ");
-		int[] array = new int[input.length];
 		
-		for (int i = 0; i < array.length; i++) {
-			array[i] = Integer.parseInt(input[i]);
+		for (int i = 0; i < input.length; i++) {
+			insert(Integer.parseInt(input[i]));
 		}
-		return array;
-	}
-}
-
-class BST {
-	private Node root;
-	
-	public boolean isEmpty() {
-		return this.root == null;
+		System.out.println(height(root));
 	}
 	
-	public void insert(int value) {
-		if (isEmpty()) {
-			this.root = new Node(value);
-		}
-		else {
-			this.root.insert(value);
-		}
-	}
-	
-	public int height() {
-		return this.height(root);
-	}
-
-	private int height(Node node) {
-		int result = -1;
-		if (!node.isEmpty()) {
-			result = 1 + Math.max(height(node.getLeft()), height(node.getRight()));
-		}
-		return result;
-	}
-
-	public Node getRoot() {
+	public static Node getRoot() {
 		return root;
 	}
 	
+	public static boolean isEmpty() {
+		return root == null;
+	}
+	
+	public static int height(Node node) {
+		int result = -1;
+		
+		if (node != null) {
+			int leftHeight = height(node.getLeft());
+			int rightHeight = height(node.getRight());
+			
+			if (leftHeight > rightHeight) {
+				result = leftHeight + 1;
+			}
+			
+			else {
+				result = rightHeight + 1; 
+			}
+			
+		}
+		return result;
+	}
+	
+	public static void insert(Integer value) {
+		Node newNode = new Node(value);
+		
+		if (isEmpty()) {
+			root = newNode;
+		}
+		
+		else {
+			insertNotEmpty(value, newNode);
+		}
+	}
+	
+	public static void insertNotEmpty(Integer value, Node node) {
+		Node aux = root;
+		
+		while(aux != null) {
+			if (value > aux.getValue()) {
+				if (aux.getRight() == null) {
+					node.setParent(aux);
+					aux.setRight(node);
+					break;
+				}	
+				else {
+					aux = aux.getRight();
+				}
+			}
+			else if (value < aux.getValue()) {
+				if (aux.getLeft() == null) {
+					node.setParent(aux);
+					aux.setLeft(node);
+					break;
+				}	
+				else {
+					aux = aux.getLeft();
+				}
+			}
+			else if (value == aux.getValue()) {
+				break;
+			}
+		}
+	}	
 }
 
 class Node {
-	
-	private int value;
+	private Integer value;
 	private Node parent;
 	private Node left;
 	private Node right;
 	
-	public Node(int value) {
+	public Node(Integer value) {
 		this.value = value;
 	}
-
-	public void insert(int value) {
-		if (value > this.value) {
-			if (this.right == null) {
-				Node newNode = new Node(value);
-				this.right = newNode;
-				newNode.parent = this;
-			}
-			else {
-				this.right.insert(value);
-			}
-		}
-		
-		else if (value < this.value) {
-			if (this.left == null) {
-				Node newNode = new Node(value);
-				this.left = newNode;
-				newNode.parent = this;
-			}
-			else {
-				this.left.insert(value);
-			}
-		}
-	}
 	
-	public boolean isEmpty() {
-		return this.value == 0;
+	public boolean isLeaf() {
+		return this.left == null && this.right == null;
 	}
+
+	public Integer getValue() {
+		return value;
+	}
+
 	public Node getParent() {
 		return parent;
 	}
@@ -110,6 +112,10 @@ class Node {
 
 	public Node getRight() {
 		return right;
+	}
+
+	public void setValue(Integer value) {
+		this.value = value;
 	}
 
 	public void setParent(Node parent) {
