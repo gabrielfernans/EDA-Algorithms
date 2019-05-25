@@ -1,81 +1,90 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class quantidadeElementosMaioresBST {
-	public static Node root = new Node(null);
+class QuantidadeElementosMaioresBST {
+	private static Scanner scan;
+	private static Node root = new Node(null);
 	
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		String string[] = sc.nextLine().split(" ");
-		int numeroAlvo = sc.nextInt();
-		sc.nextLine();
-		sc.close();
+		scan = new Scanner(System.in);
 		
-		for (int i = 0; i < string.length; i++) {
-			insereNaBST(Integer.parseInt(string[i]), getRoot());
+		String[] values = scan.nextLine().split(" ");
+		int numeroAlvo = scan.nextInt();
+		scan.nextLine();
+		scan.close();
+		
+		for (int i = 0; i < values.length; i++) {
+			insert(Integer.parseInt(values[i]), getRoot());
 		}
 		
-		int numNumerosMaiores = verificaNumerosMaiores(numeroAlvo, getRoot());
+		int num = biggerElements(numeroAlvo, getRoot());
 		
-		System.out.println(preOrder().toString() + "\n" + numNumerosMaiores);
-		//System.out.println(numNumerosMaiores);
+		System.out.println(preOrder().toString() + "\n" + num);
 	}
-
+	
 	private static ArrayList<Integer> preOrder() {
-		ArrayList<Integer> lista =  new ArrayList<Integer>(size());
-		preOrder(getRoot(), lista);
-		return lista;
+		ArrayList<Integer> list =  new ArrayList<Integer>(size());
+		preOrder(getRoot(), list);
+		return list;
 	}
-
-	private static void preOrder(Node node, ArrayList<Integer> lista) {
+	
+	private static void preOrder(Node node, ArrayList<Integer> list) {
 		if (node.getValue() != null) {
-			lista.add(node.getValue());
-			preOrder(node.getLeft(), lista);
-			preOrder(node.getRight(), lista);
+			list.add(node.getValue());
+			preOrder(node.getLeft(), list);
+			preOrder(node.getRight(), list);
 		}
-		
 	}
-
-	private static int verificaNumerosMaiores(int num, Node node) {
-		int retorno = 0;
+	
+	private static int biggerElements(int num, Node node) {
+		int output = 0;
+		
 		if (node.getValue() != null) {
 			if(node.getValue() > num) {
-				retorno += 1 + size(node.getRight());
-				retorno += verificaNumerosMaiores(num, node.getLeft());
-			} else {
-				retorno += verificaNumerosMaiores(num, node.getRight());
+				output += 1 + size(node.getRight());
+				output += biggerElements(num, node.getLeft());
+			} 
+			else {
+				output += biggerElements(num, node.getRight());
 			}
 		}
-		return retorno;
+		return output;
+	}
+	
+	public static Node getRoot() {
+		return root;
+	}
+	
+	public static boolean isEmpty() {
+		return root == null;
+	}
+	
+	public static void insert(Integer num, Node node) {
+		if (node.getValue() == null) {
+			node.setValue(num);
+			node.setLeft(new Node(null));
+			node.setRight(new Node(null));
+		} 
+		else if (num < node.getValue()) {
+			insert(num, node.getLeft());
+		} 
+		else if (num > node.getValue()) {
+			insert(num, node.getRight());
+		}
 	}
 	
 	private static int size() {
 		return size(root);
 	}
-
+	
 	private static int size(Node node) {
 		int size = 0;
+		
 		if (node.getValue() != null) {
 			size = 1 + size(node.getLeft()) + size(node.getRight());
 		}
 		return size;
-	}
-
-	private static void insereNaBST(int num, Node node) {
-		if (node.getValue() == null) {
-			node.setValue(num);
-			node.setLeft(new Node(null));
-			node.setRight(new Node(null));
-		} else if (num < node.getValue()){
-			insereNaBST(num, node.getLeft());
-		} else if (num > node.getValue()) {
-			insereNaBST(num, node.getRight());
-		}
-	}
-
-	private static Node getRoot() {
-		return root;
-	}
+    }
 }
 
 class Node {
@@ -124,4 +133,3 @@ class Node {
 		this.right = right;
 	}
 }
-

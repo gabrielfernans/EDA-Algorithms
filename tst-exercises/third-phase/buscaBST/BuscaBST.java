@@ -14,7 +14,6 @@ class BuscaBST {
 		for (int i = 0; i < values.length; i++) {
 			insert(Integer.parseInt(values[i]));
 		}
-
 		search(element);
 	}
 	
