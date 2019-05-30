@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class RecursiveSelectionSort {
-
 	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
@@ -19,7 +18,6 @@ public class RecursiveSelectionSort {
 	}
 
 	public static void sort(int[] array, int leftIndex, int rightIndex) {
-		
 		if (leftIndex < rightIndex) {
 			int minIndex = leftIndex;
 			for (int i = leftIndex+1; i <= rightIndex; i++) {
@@ -40,5 +38,4 @@ public class RecursiveSelectionSort {
 			array[i] = temp;
 		}
 	}
-	
 }

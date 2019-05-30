@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class CountingNegativo {
 
 	public static void main(String[] args) {
-
 		Scanner sc = new Scanner(System.in);
 		String[] entrada = sc.nextLine().split(" ");
 		int max = Integer.parseInt(sc.nextLine());
@@ -18,8 +17,8 @@ public class CountingNegativo {
 	}
 	
 	public static int[] getIntArray(String[] entrada) {
-
 		int[] out = new int[entrada.length];
+		
 		for (int i = 0; i < entrada.length; i++) {
 			out[i] = Integer.parseInt(entrada[i]);
 		}
@@ -27,10 +26,9 @@ public class CountingNegativo {
 	}
 	
 	public static void sort(int[] array, int leftIndex, int rightIndex, int min, int max) {
-
 		if (leftIndex < rightIndex && rightIndex > -1) {
 
-			int k = Math.abs(min) + Math.abs(max); // k + 1 = tamanho do array de contagem
+			int k = Math.abs(min) + Math.abs(max);
 			int[] contagem = new int[k + 1];
 			contarFrequencia(array, contagem, k + 1, min); 
 			cumulativa(contagem);
@@ -38,31 +36,33 @@ public class CountingNegativo {
 			System.out.println("Cumulativa do vetor de contagem - " + Arrays.toString(contagem));
 
 			int[] b = new int[rightIndex + 1];
-			for (int i = rightIndex; i >= 0; i--) { // percorrer array[] de trás pra frente, ordenando os elementos no
-													// array auxiliar
+			
+			for (int i = rightIndex; i >= 0; i--) {
 				b[contagem[array[i] + Math.abs(min)] - 1] = array[i];
 				contagem[array[i] + Math.abs(min)] -= 1;
 			}
 			
 			System.out.println(Arrays.toString(contagem));
 			
-			for (int i = 0; i < array.length; i++) { // substitui o array original pelo array auxiliar ordenado
+			for (int i = 0; i < array.length; i++) {
 				array[i] = b[i];
 			}
-			
 			System.out.println(Arrays.toString(array));
 		}
 	}
 
 	public static void contarFrequencia(int[] array, int[] contagem, int tam, int min) {
-
-		for (int n = 0; n < tam; n++) { // preencher o array de contagem com zeros
+		for (int n = 0; n < tam; n++) {
 			contagem[n] = 0;
 		}
-		for (int j = 0; j < array.length; j++) { // preencher contagem com frequencias
+		
+		for (int j = 0; j < array.length; j++) {
+			
 			if (array[j] < 0) {
 				contagem[Math.abs(min) - Math.abs(array[j])] += 1;
-			} else {
+			}
+			
+			else {
 				contagem[Math.abs(min) + array[j]] += 1;
 			}
 			System.out.println(Arrays.toString(contagem));
@@ -70,12 +70,10 @@ public class CountingNegativo {
 	}
 
 	public static void cumulativa(int[] contagem) {
-
 		int soma = 0;
 		for (int i = 0; i < contagem.length; i++) {
 			soma += contagem[i];
 			contagem[i] = soma;
 		}
 	}
-
 }

@@ -16,6 +16,7 @@ class Parenteses {
 		if (validSequence(sequenceList)) {
 			System.out.println("S");
 		}
+		
 		else {
 			System.out.println("N");
 		}
@@ -23,8 +24,9 @@ class Parenteses {
 	}
 
 	private static boolean validSequence(LinkedList<String> sequence) {
-		if (sequence.size() % 2 != 0 || !sequence.peekFirst().equals("("))
+		if (sequence.size() % 2 != 0 || !sequence.peekFirst().equals("(")) {
 			return false;
+		}
 		
 		Stack<String> stack = new Stack<String>();
 		boolean result = true;
@@ -34,9 +36,11 @@ class Parenteses {
 			if (sequence.get(i).equals(")") && stack.isEmpty()) {
 				result = false;
 			}
+			
 			else if (sequence.get(i).equals("(")) {
 				stack.push(sequence.get(i));
 			}
+			
 			else {
 				stack.pop();
 			}
@@ -44,5 +48,4 @@ class Parenteses {
 		}
 		return result && stack.isEmpty();
 	}
-
 }

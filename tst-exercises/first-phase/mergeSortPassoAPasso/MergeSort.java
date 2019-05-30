@@ -10,7 +10,6 @@ import java.util.Scanner;
  *
  */
 class MergeSort {
-	
 	private static Scanner scan;
 	public static void main(String[] args) {
 		scan = new Scanner(System.in);
@@ -26,8 +25,8 @@ class MergeSort {
 
 	private static void mergeSort(int[] array, int leftIndex, int rightIndex) {
 		printArray(array, leftIndex, rightIndex);
+		
 		if (leftIndex < rightIndex) {
-
 			int mid = (leftIndex + rightIndex) / 2;
 			mergeSort(array, leftIndex, mid);
 			mergeSort(array, mid + 1, rightIndex);
@@ -51,6 +50,7 @@ class MergeSort {
 				array[currentIndex] = aux[i];
 				i++;	
 			}
+			
 			else {
 				array[currentIndex] = aux[j];
 				j++;
@@ -69,7 +69,6 @@ class MergeSort {
 			j++;
 			currentIndex++;
 		}
-
 	}
 
 	private static int[] getArrayIntegers(Scanner scan) {
@@ -85,5 +84,4 @@ class MergeSort {
 	private static void printArray(int[] array, int leftIndex, int rightIndex) {
 		System.out.println(Arrays.toString(Arrays.copyOfRange(array, leftIndex, rightIndex + 1)));
 	}
-
 }

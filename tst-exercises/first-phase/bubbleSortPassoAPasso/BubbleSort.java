@@ -34,8 +34,8 @@ class BubbleSort {
 		if(sorted) {
 			System.out.println(printArray(array));
 		}
+		
 		else {
-			
 			while(!sorted) {
 				flag = false;
 				
@@ -45,9 +45,11 @@ class BubbleSort {
 						flag = true;
 					}
 				}
+				
 				if(!flag) {
 					sorted = true;
 				}
+				
 				else {
 					System.out.println(printArray(array));
 				}		

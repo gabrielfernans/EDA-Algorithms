@@ -11,10 +11,8 @@ import java.util.Scanner;
  *
  */
 class SelectionSort {
-	
 	private static Scanner scan;
 	public static void main(String[] args) {
-		
 		scan = new Scanner(System.in);
 		String[] entry = scan.nextLine().split(" ");
 		

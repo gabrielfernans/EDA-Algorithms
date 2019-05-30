@@ -2,10 +2,10 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 class ParticionaEstavel {
-
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		int[] array = getArrayInteiros(scan);
+		
 		particionaEstavel(array);
 		System.out.println(Arrays.toString(array));
 		scan.close();
@@ -26,8 +26,8 @@ class ParticionaEstavel {
 				}
 			}
 		}
-
 		int j = 1;
+		
 		while (j <= indexUltimoMenor) {
 			swap(array, j, j - 1);
 			j++;
@@ -37,6 +37,7 @@ class ParticionaEstavel {
 	private static int[] getArrayInteiros(Scanner scan) {
 		String[] entrada = scan.nextLine().split(" ");
 		int[] array = new int[entrada.length];
+		
 		for (int i = 0; i < array.length; i++) {
 			array[i] = Integer.parseInt(entrada[i]);
 		}
